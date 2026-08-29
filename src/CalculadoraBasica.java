@@ -74,3 +74,62 @@ public class CalculadoraBasica {
         double resultado = num1 + num2;
         System.out.printf("Resultado: %.2f + %.2f = %.2f%n", num1, num2, resultado);
     }
+    /**
+     * Solicita dos números y realiza la resta.
+     */
+    private static void realizarResta(Scanner scanner) {
+        System.out.println("\n--- RESTA ---");
+        double num1 = leerNumero(scanner, "Ingrese el primer número: ");
+        double num2 = leerNumero(scanner, "Ingrese el segundo número: ");
+        double resultado = num1 - num2;
+        System.out.printf("Resultado: %.2f - %.2f = %.2f%n", num1, num2, resultado);
+    }
+
+    /**
+     * Solicita dos números y realiza la multiplicación.
+     */
+    private static void realizarMultiplicacion(Scanner scanner) {
+        System.out.println("\n--- MULTIPLICACIÓN ---");
+        double num1 = leerNumero(scanner, "Ingrese el primer número: ");
+        double num2 = leerNumero(scanner, "Ingrese el segundo número: ");
+        double resultado = num1 * num2;
+        System.out.printf("Resultado: %.2f × %.2f = %.2f%n", num1, num2, resultado);
+    }
+
+    /**
+     * Solicita dos números y realiza la división.
+     * Valida que el divisor no sea cero.
+     */
+    private static void realizarDivision(Scanner scanner) {
+        System.out.println("\n--- DIVISIÓN ---");
+        double num1 = leerNumero(scanner, "Ingrese el dividendo: ");
+        double num2;
+
+        // Validación específica de división por cero
+        do {
+            num2 = leerNumero(scanner, "Ingrese el divisor: ");
+            if (num2 == 0) {
+                System.out.println("❌ Error: No se puede dividir por cero. Intente de nuevo.");
+            }
+        } while (num2 == 0);
+
+        double resultado = num1 / num2;
+        System.out.printf("Resultado: %.2f ÷ %.2f = %.2f%n", num1, num2, resultado);
+    }
+
+    /**
+     * Método auxiliar que lee un número real (double) de forma segura.
+     * Si el usuario ingresa texto u otro valor inválido, se vuelve a solicitar.
+     */
+    private static double leerNumero(Scanner scanner, String mensaje) {
+        while (true) {
+            System.out.print(mensaje);
+            try {
+                return scanner.nextDouble();
+            } catch (InputMismatchException e) {
+                System.out.println("❌ Entrada inválida. Debe ingresar un número válido.");
+                scanner.nextLine(); // limpia el buffer del scanner
+            }
+        }
+    }
+}
